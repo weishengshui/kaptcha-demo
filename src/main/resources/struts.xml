@@ -5,10 +5,11 @@
 
 <struts>
 
-	<package name="kaptcha" extends="struts-default">
+	<package name="kaptcha" extends="struts-default" namespace="/">
 	    
 	    <action name="login" class="com.wss.lsl.kaptcha.action.LoginAction" method="login">
 	        <result name="success">/welcome.jsp</result>
+	        <result name="input">/index.jsp</result>
 	    </action>
 	    
 	</package>

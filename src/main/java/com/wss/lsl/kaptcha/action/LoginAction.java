@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class LoginAction extends ActionSupport {
@@ -23,10 +24,16 @@ public class LoginAction extends ActionSupport {
 	}
 
 	public String login() throws Exception {
-		HttpSession session = ServletActionContext.getRequest().getSession();
-		code =  (String)session.getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_CONFIG_KEY);
-		System.out.println("----------------------------code: "+code);
-		// TODO Auto-generated method stub
-		return SUCCESS;
+		
+		System.out.println("ActionContext.getContext().getSession().get(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY): "+
+				ActionContext.getContext().getSession().get(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY));
+		String tmpcode =  (String)ActionContext.getContext().getSession().get(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
+		System.out.println("----------------------------图片code: "+tmpcode);
+		System.out.println("----------------------------你输入的code: "+code);
+		if(tmpcode != null && tmpcode.equalsIgnoreCase(code)){
+			return SUCCESS;
+		}
+		return INPUT;
+		
 	}
 }

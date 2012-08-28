@@ -7,7 +7,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
+<%
+	String kapatch = (String)request.getSession().getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
+%>
 <body>
 	<h2>获取的验证码<s:property value="code"/> </h2>
+	<%=kapatch %>
 </body>
 </html>
